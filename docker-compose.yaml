@@ -1,0 +1,52 @@
+version: '3.0'
+
+services:
+
+  mysql:
+    image: mysql:8
+    # mem_limit: 1536M
+    restart: unless-stopped
+    # logging:
+    #   driver: none
+    # command: --wiredTigerCacheSizeGB 1
+    # healthcheck:
+    #   test: echo 'db.runCommand("ping").ok' | mongo localhost:27017/test --quiet
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: imin
+      MYSQL_ROOT_PASSWORD: M0tivati0n
+    ports:
+      - 3300:3306
+    networks:
+      - imin_network
+    container_name: imin-db
+    volumes:
+      - dbdata:/var/lib/imin-mysql
+      - ./imin-mysql/my.cnf:/etc/imin-mysql/my.cnf
+  
+  api:
+    container_name: imin-api
+    build:
+      context: .
+      # target: development
+    volumes:
+      - .:/usr/src/imin-api
+      - /usr/src/imin-api/node_modules
+    ports:
+      - 5000:5000
+    networks:
+      - imin_network
+    command: npm run start:dev
+    # env_file:
+    #   - .env
+
+volumes:
+  dbdata:
+    driver: local
+
+networks:
+  imin_network:
+    external: true
