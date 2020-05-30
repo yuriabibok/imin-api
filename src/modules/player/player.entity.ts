@@ -1,13 +1,10 @@
 import { Table, Column, Model } from 'sequelize-typescript';
 
 @Table
-export class Person extends Model<Person> {
+export class Player extends Model<Player> {
   @Column
   name: string;
 
   @Column
-  birthday: Date;
-
-  @Column
-  email: string;
+  age: number;
 }

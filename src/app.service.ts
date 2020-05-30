@@ -1,17 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import sequelize from './db/config';
-import { Person } from './db/models/Person';
+import { Player } from './modules/player/player.entity';
+import { PlayerService } from './modules/player/player.service';
 
 @Injectable()
 export class AppService {
-  async getHello(): Promise<Person> {
-    await sequelize.sync();
+  constructor(private playerService: PlayerService) { }
 
-    const personRepository = sequelize.getRepository(Person);
+  async getHello(): Promise<Player[]> {
+    const players = await this.playerService.findAll();
 
-    await personRepository.create({ name: 'Luke Skywalker' });
-    const person = await personRepository.findOne({ where: { name: 'Luke Skywalker' } });
-
-    return person;
+    return players;
   }
 }

@@ -8,8 +8,6 @@ module.exports = {
   extends: [
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
   ],
   root: true,
   env: {
@@ -18,7 +16,13 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    'no-empty-function': ['error', { 'allow': ['constructors'] }],
+    'quotes': [2, 'single', 'avoid-escape'],
+    'comma-dangle': ['error', 'always-multiline'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['error'],
+    "semi": [2, "always"]
   },
 };
