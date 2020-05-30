@@ -27,21 +27,21 @@ services:
       - dbdata:/var/lib/imin-mysql
       - ./imin-mysql/my.cnf:/etc/imin-mysql/my.cnf
   
-  api:
-    container_name: imin-api
-    build:
-      context: .
-      # target: development
-    volumes:
-      - .:/usr/src/imin-api
-      - /usr/src/imin-api/node_modules
-    ports:
-      - 5000:5000
-    networks:
-      - imin_network
-    command: npm run start:dev
-    # env_file:
-    #   - .env
+  # api:
+  #   container_name: imin-api
+  #   build:
+  #     context: .
+  #     # target: development
+  #   volumes:
+  #     - .:/usr/src/imin-api
+  #     - /usr/src/imin-api/node_modules
+  #   ports:
+  #     - 5000:5000
+  #   networks:
+  #     - imin_network
+  #   command: npm run start:dev
+  #   # env_file:
+  #   #   - .env
 
 volumes:
   dbdata:
