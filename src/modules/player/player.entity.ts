@@ -19,9 +19,6 @@ export class Player extends Model<Player> {
   @Column
   public email: string
 
-  @Column({ defaultValue: true })
-  public enabled: boolean;
-
   @BelongsToMany(() => Team, () => TeamPlayer)
   public teams: Team[];
 

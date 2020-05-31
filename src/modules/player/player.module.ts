@@ -10,7 +10,6 @@ import { DatabaseModule } from '../database/database.module';
     PlayerService,
     ...playerProviders,
   ],
-  exports: [PlayerService,
-    ...playerProviders],
+  exports: [...playerProviders],
 })
 export class PlayerModule { }

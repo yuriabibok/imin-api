@@ -26,5 +26,10 @@ module.exports = {
     "semi": ["error", "always"],
     "eol-last": ["error", "always"],
     "@typescript-eslint/explicit-member-accessibility": ["error"],
+    "padding-line-between-statements": [
+      "error",
+      { blankLine: "always", prev: "*", next: "return" }
+    ],
+    // "import/newline-after-import": ["error", { "count": 2 }]
   },
 };

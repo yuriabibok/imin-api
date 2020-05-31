@@ -16,7 +16,6 @@ export class GameService {
       attributes: [],
       where: {
         id: userId,
-        enabled: true,
       },
       include: [{
         model: Game,
