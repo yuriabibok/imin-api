@@ -7,18 +7,18 @@ import { Team } from '../team/team.entity';
 export class Game extends Model<Game> {
 
   @Column
-  title: string;
+  public title: string;
 
   @Column
-  date: Date;
+  public date: Date;
 
   @ForeignKey(() => Team)
   @Column
-  teamId: number;
+  public teamId: number;
  
   @BelongsTo(() => Team)
-  team: Team;
+  public team: Team;
   
   @BelongsToMany(() => Player, () => GamePlayer)
-  players: Player[];
+  public players: Player[];
 }

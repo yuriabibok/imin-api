@@ -7,11 +7,11 @@ import { TeamPlayer } from '../teamPlayer/teamPlayer.entity';
 export class Team extends Model<Team> {
 
   @Column
-  name: string;
+  public name: string;
 
   @HasMany(() => Game)
-  games: Game[];
+  public games: Game[];
 
   @BelongsToMany(() => Player, () => TeamPlayer)
-  players: Player[];
+  public players: Player[];
 }

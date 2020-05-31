@@ -4,9 +4,9 @@ import { PlayerService } from './modules/player/player.service';
 
 @Injectable()
 export class AppService {
-  constructor(private playerService: PlayerService) { }
+  public constructor(private playerService: PlayerService) { }
 
-  async getHello(): Promise<Player[]> {
+  public async getHello(): Promise<Player[]> {
     const players = await this.playerService.findAll();
 
     return players;

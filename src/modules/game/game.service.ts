@@ -1,0 +1,44 @@
+import { Injectable, Inject } from '@nestjs/common';
+import { Game } from './game.entity';
+import { getGlobalProp } from 'src/utils/globalStorage';
+import { Player } from '../player/player.entity';
+import { Op } from 'sequelize';
+import { Team } from '../team/team.entity';
+
+@Injectable()
+export class GameService {
+  public constructor(@Inject('PLAYER_REPOSITORY') private playerRepository: typeof Player) { }
+
+  public async getUpcomingGames(): Promise<Game[]> {
+    const userId = getGlobalProp('userId');
+    const player = await this.playerRepository.findOne({
+      where: {
+        id: userId,
+        enabled: true,
+      },
+      include: [{
+        model: Game,
+        attributes: ['id', 'title', 'date'],
+        through: {
+          attributes: [],
+        },
+        where: {
+          date: {
+            [Op.gt]: new Date(),
+          },
+        },
+        include: [{
+          model: Player,
+          attributes: ['id', 'firstName', 'lastName', 'age', 'email'],
+          through: {
+            attributes: [],
+          },
+        }, {
+          model: Team,
+        }],
+      }],
+    });
+
+    return player.games;
+  }
+}

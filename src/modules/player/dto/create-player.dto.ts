@@ -1,4 +1,6 @@
 export class CreatePlayerDTO {
-  name: string;
-  age: number;
+  
+  public name: string;
+
+  public age: number;
 }

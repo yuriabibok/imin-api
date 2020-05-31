@@ -4,10 +4,10 @@ import { Player } from './modules/player/player.entity';
 
 @Controller()
 export class AppController {
-  constructor(private appService: AppService) { }
+  public constructor(private appService: AppService) { }
 
   @Get()
-  async getHello(): Promise<Player[]> {
+  public async getHello(): Promise<Player[]> {
     return await this.appService.getHello();
   }
 }

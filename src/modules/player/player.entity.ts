@@ -8,23 +8,23 @@ import { TeamPlayer } from '../teamPlayer/teamPlayer.entity';
 export class Player extends Model<Player> {
 
   @Column
-  firstName: string;
+  public firstName: string;
 
   @Column
-  lastName: string;
+  public lastName: string;
 
   @Column
-  age?: number;
+  public age?: number;
 
   @Column
-  email: string
+  public email: string
 
   @Column({ defaultValue: true })
-  enabled: boolean;
+  public enabled: boolean;
 
   @BelongsToMany(() => Team, () => TeamPlayer)
-  teams: Team[];
+  public teams: Team[];
 
   @BelongsToMany(() => Game, () => GamePlayer)
-  games: Game[];
+  public games: Game[];
 }

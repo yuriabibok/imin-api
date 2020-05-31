@@ -6,13 +6,13 @@ import { Team } from '../team/team.entity';
 export class TeamPlayer extends Model<TeamPlayer> {
   
   @Column({ defaultValue: 0 })
-  balance: number;
+  public balance: number;
 
   @ForeignKey(() => Team)
   @Column
-  teamId: number;
+  public teamId: number;
  
   @ForeignKey(() => Player)
   @Column
-  playerId: number;
+  public playerId: number;
 }

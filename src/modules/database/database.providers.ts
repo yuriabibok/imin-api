@@ -20,7 +20,7 @@ export const databaseProviders = [
       });
       const models = [Player, Team, Game, TeamPlayer, GamePlayer];
       sequelize.addModels(models);
-      await sequelize.sync({ alter: true });
+      await sequelize.sync();
       return sequelize;
     },
   },
