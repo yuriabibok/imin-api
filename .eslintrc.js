@@ -30,6 +30,5 @@ module.exports = {
       "error",
       { blankLine: "always", prev: "*", next: "return" }
     ],
-    // "import/newline-after-import": ["error", { "count": 2 }]
   },
 };

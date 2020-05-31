@@ -3,8 +3,6 @@ import { Team } from './team.entity';
 import { getGlobalProp } from 'src/utils/globalStorage';
 import { Player } from '../player/player.entity';
 import { Game } from '../game/game.entity';
-// import { Player } from '../player/player.entity';
-// import { Op } from 'sequelize';
 
 @Injectable()
 export class TeamService {
