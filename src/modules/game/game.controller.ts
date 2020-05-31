@@ -1,4 +1,4 @@
-import { Controller, Get, Headers } from '@nestjs/common';
+import { Controller, Get, Headers, Param } from '@nestjs/common';
 import { Game } from './game.entity';
 import { GameService } from './game.service';
 import { setGlobalProp } from 'src/utils/globalStorage';
@@ -12,5 +12,12 @@ export class GameController {
     setGlobalProp('userId', headers['userId'] || 1);
 
     return await this.gameService.getUpcomingGames();
+  }
+
+  @Get('/:id')
+  public async get(@Headers() headers, @Param() params): Promise<Game> {
+    setGlobalProp('userId', headers['userId'] || 1);
+
+    return await this.gameService.get(params.id);
   }
 }

@@ -7,11 +7,13 @@ import { Team } from '../team/team.entity';
 
 @Injectable()
 export class GameService {
-  public constructor(@Inject('PLAYER_REPOSITORY') private playerRepository: typeof Player) { }
+  public constructor(@Inject('GAME_REPOSITORY') private gameRepository: typeof Game,
+    @Inject('PLAYER_REPOSITORY') private playerRepository: typeof Player) { }
 
   public async getUpcomingGames(): Promise<Game[]> {
     const userId = getGlobalProp('userId');
     const player = await this.playerRepository.findOne({
+      attributes: [],
       where: {
         id: userId,
         enabled: true,
@@ -40,5 +42,25 @@ export class GameService {
     });
 
     return player.games;
+  }
+
+  public async get(id: string): Promise<Game> {
+    const game = await this.gameRepository.findOne({
+      attributes: ['id', 'title', 'date'],
+      where: {
+        id,
+      },
+      include: [{
+        model: Player,
+        attributes: ['id', 'firstName', 'lastName', 'age', 'email'],
+        through: {
+          attributes: ['attendance', 'bestPlayer'],
+        },
+      }, {
+        model: Team,
+      }],
+    });
+
+    return game;
   }
 }

@@ -9,6 +9,9 @@ export class Team extends Model<Team> {
   @Column
   public name: string;
 
+  @Column
+  public capacity: number;
+
   @HasMany(() => Game)
   public games: Game[];
 
