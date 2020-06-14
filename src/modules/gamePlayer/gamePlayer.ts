@@ -4,9 +4,6 @@ import { Player } from '../player/player.entity';
 
 @Table({ timestamps: false })
 export class GamePlayer extends Model<GamePlayer> {
-  
-  @Column({ defaultValue: false })
-  public attendance: boolean;
 
   @Column({ defaultValue: 0 })
   public investment: number;
@@ -20,7 +17,7 @@ export class GamePlayer extends Model<GamePlayer> {
   @ForeignKey(() => Game)
   @Column
   public gameId: number;
- 
+
   @ForeignKey(() => Player)
   @Column
   public playerId: number;

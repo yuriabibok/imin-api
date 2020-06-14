@@ -4,13 +4,15 @@ import { getGlobalProp } from 'src/utils/globalStorage';
 import { Player } from '../player/player.entity';
 import { Op } from 'sequelize';
 import { Team } from '../team/team.entity';
+import { map, mapDetails } from './game.mapper';
+import { GameDTO, GameDetailsDTO } from './game.dto';
 
 @Injectable()
 export class GameService {
   public constructor(@Inject('GAME_REPOSITORY') private gameRepository: typeof Game,
     @Inject('PLAYER_REPOSITORY') private playerRepository: typeof Player) { }
 
-  public async getUpcomingGames(): Promise<Game[]> {
+  public async getUpcomingGames(): Promise<GameDTO[]> {
     const userId = getGlobalProp('userId');
     const player = await this.playerRepository.findOne({
       attributes: [],
@@ -30,7 +32,7 @@ export class GameService {
         },
         include: [{
           model: Player,
-          attributes: ['id', 'firstName', 'lastName', 'age', 'email'],
+          attributes: ['id', 'firstName', 'lastName'],
           through: {
             attributes: [],
           },
@@ -40,10 +42,10 @@ export class GameService {
       }],
     });
 
-    return player.games;
+    return player.games.map(map);
   }
 
-  public async get(id: string): Promise<Game> {
+  public async get(id: string): Promise<GameDetailsDTO> {
     const game = await this.gameRepository.findOne({
       attributes: ['id', 'title', 'date'],
       where: {
@@ -51,15 +53,22 @@ export class GameService {
       },
       include: [{
         model: Player,
-        attributes: ['id', 'firstName', 'lastName', 'age', 'email'],
+        attributes: ['id', 'firstName', 'lastName'],
         through: {
-          attributes: ['attendance', 'bestPlayer'],
+          attributes: ['bestPlayer'],
         },
       }, {
         model: Team,
+        include: [{
+          model: Player,
+          attributes: ['id', 'firstName', 'lastName'],
+          through: {
+            attributes: [],
+          },
+        }],
       }],
     });
 
-    return game;
+    return mapDetails(game);
   }
 }
