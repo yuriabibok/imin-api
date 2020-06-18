@@ -3,6 +3,8 @@ import { Team } from './team.entity';
 import { getGlobalProp } from 'src/utils/globalStorage';
 import { Player } from '../player/player.entity';
 import { Game } from '../game/game.entity';
+import { TeamDTO } from './team.dto';
+import { mapDetails } from './team.mapper';
 
 @Injectable()
 export class TeamService {
@@ -23,7 +25,7 @@ export class TeamService {
     return teams;
   }
 
-  public async get(id: string): Promise<Team> {
+  public async get(id: string): Promise<TeamDTO> {
     const team = await this.teamRepository.findOne({
       where: {
         id,
@@ -39,6 +41,6 @@ export class TeamService {
       }],
     });
 
-    return team;
+    return mapDetails(team);
   }
 }

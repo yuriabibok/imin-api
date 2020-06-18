@@ -9,6 +9,12 @@ export interface GameDTO {
   team: TeamDTO;
 }
 
+export interface GameInTeamDTO {
+  id: string;
+  title: string;
+  date: Date;
+}
+
 export interface GameDetailsDTO extends GameDTO {
   teamPlayers: PlayerInGameDTO[];
 }

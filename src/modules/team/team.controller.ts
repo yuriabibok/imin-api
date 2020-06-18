@@ -2,6 +2,7 @@ import { Controller, Get, Headers, Param } from '@nestjs/common';
 import { Team } from './team.entity';
 import { TeamService } from './team.service';
 import { setGlobalProp } from 'src/utils/globalStorage';
+import { TeamDTO } from './team.dto';
 
 @Controller({ path: 'teams' })
 export class TeamController {
@@ -15,7 +16,7 @@ export class TeamController {
   }
 
   @Get('/:id')
-  public async get(@Param() params): Promise<Team> {
+  public async get(@Param() params): Promise<TeamDTO> {
     return await this.teamService.get(params.id);
   }
 }

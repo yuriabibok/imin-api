@@ -1,5 +1,5 @@
 import { Game } from './game.entity';
-import { GameDTO, GameDetailsDTO } from './game.dto';
+import { GameDTO, GameDetailsDTO, GameInTeamDTO } from './game.dto';
 import { map as mapTeam } from '../team/team.mapper';
 import { mapInGame } from '../player/player.mapper';
 
@@ -10,6 +10,14 @@ export const map = (game: Game): GameDTO => {
     date: game.date,
     team: mapTeam(game.team),
     playersInGameCount: game.players.length,
+  };
+};
+
+export const mapGameInTeam = (game: Game): GameInTeamDTO => {
+  return {
+    id: game.id,
+    title: game.title,
+    date: game.date,
   };
 };
 
