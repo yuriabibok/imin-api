@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 import path = require('path');
 
 dotenv.config();
-const envPath = path.resolve(__dirname, '../../config/.env');
+const envPath = path.resolve(__dirname, 'src/config/.env');
 dotenv.config({ path: envPath });
 
 export default {

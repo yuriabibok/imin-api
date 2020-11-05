@@ -1,10 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Player } from '../player/player.entity';
-import { Team } from '../team/team.entity';
-import { Game } from '../game/game.entity';
-import { TeamPlayer } from '../teamPlayer/teamPlayer.entity';
-import { GamePlayer } from '../gamePlayer/gamePlayer';
-import config from 'config';
+
+import config from 'src/config';
+
+import models from './models';
 
 export const databaseProviders = [
   {
@@ -18,7 +16,6 @@ export const databaseProviders = [
         password: config.db.pass,
         database: config.db.database,
       });
-      const models = [Player, Team, Game, TeamPlayer, GamePlayer];
       sequelize.addModels(models);
       await sequelize.sync();
 

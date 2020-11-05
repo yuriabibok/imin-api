@@ -16,13 +16,14 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/camelcase": "off",
     "no-empty-function": ["error", { "allow": ["constructors"] }],
     "quotes": [2, "single", "avoid-escape"],
     "comma-dangle": ["error", "always-multiline"],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "semi": ["error", "always"],
     "eol-last": ["error", "always"],
     "@typescript-eslint/explicit-member-accessibility": ["error"],
@@ -30,5 +31,17 @@ module.exports = {
       "error",
       { blankLine: "always", prev: "*", next: "return" }
     ],
+    "@typescript-eslint/no-var-requires": "off"
   },
+  overrides: [
+    {
+      // enable the rule specifically for TypeScript files
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"],
+        "@typescript-eslint/camelcase": "error",
+        "@typescript-eslint/no-var-requires": "error"
+      }
+    }
+  ]
 };
