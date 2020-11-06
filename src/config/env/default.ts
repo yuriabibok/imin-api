@@ -13,4 +13,8 @@ export default {
     pass: process.env.DB_PASS,
     database: process.env.DB_DATABASE,
   },
+  jwt: {
+    secret: 'sevret',
+    expiresIn: '2 days',
+  },
 };
